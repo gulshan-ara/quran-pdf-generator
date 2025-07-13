@@ -4,9 +4,10 @@ interface ActionButtonsProps {
   previewLoading: boolean;
   generateLoading: boolean;
   error: string | null;
+  disabled?: boolean;
 }
 
-export function ActionButtons({ onPreview, onGenerate, previewLoading, generateLoading, error }: ActionButtonsProps) {
+export function ActionButtons({ onPreview, onGenerate, previewLoading, generateLoading, error, disabled }: ActionButtonsProps) {
   return (
     <div className="space-y-3">
       {/* Error Display */}
@@ -19,7 +20,7 @@ export function ActionButtons({ onPreview, onGenerate, previewLoading, generateL
       {/* Action Buttons */}
       <button
         onClick={onPreview}
-        disabled={previewLoading || generateLoading}
+        disabled={previewLoading || generateLoading || disabled}
         className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2"
       >
         {previewLoading ? (
@@ -40,7 +41,7 @@ export function ActionButtons({ onPreview, onGenerate, previewLoading, generateL
       
       <button
         onClick={onGenerate}
-        disabled={previewLoading || generateLoading}
+        disabled={previewLoading || generateLoading || disabled}
         className="w-full bg-green-600 hover:bg-green-700 disabled:bg-green-300 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2"
       >
         {generateLoading ? (

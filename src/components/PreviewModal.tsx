@@ -1,19 +1,30 @@
 import { useRef } from "react";
 import { VerseDisplay } from "./VerseDisplay";
 import { QuranData } from "@/types/quran";
+import { CoverPageOptions } from "@/utils/coverPageGenerator";
 
 interface PreviewModalProps {
-  quranData: QuranData | null;
+  quranDataList: QuranData[];
   showPreview: boolean;
   onClose: () => void;
   onGeneratePDF: () => void;
   loading: boolean;
+  selectedSurahs: number[];
+  coverPageOptions: CoverPageOptions;
 }
 
-export function PreviewModal({ quranData, showPreview, onClose, onGeneratePDF, loading }: PreviewModalProps) {
+export function PreviewModal({ 
+  quranDataList, 
+  showPreview, 
+  onClose, 
+  onGeneratePDF, 
+  loading, 
+  selectedSurahs,
+  coverPageOptions 
+}: PreviewModalProps) {
   const previewRef = useRef<HTMLDivElement>(null);
 
-  if (!showPreview || !quranData) {
+  if (!showPreview || quranDataList.length === 0) {
     return null;
   }
 
@@ -23,7 +34,7 @@ export function PreviewModal({ quranData, showPreview, onClose, onGeneratePDF, l
         {/* Modal Header */}
         <div className="flex justify-between items-center p-6 border-b">
           <h2 className="text-xl font-semibold text-gray-800">
-            PDF Preview - {quranData.chapter.name_simple}
+            PDF Preview - {quranDataList.length} Surah{quranDataList.length !== 1 ? 's' : ''}
           </h2>
           <button
             onClick={onClose}
@@ -38,35 +49,49 @@ export function PreviewModal({ quranData, showPreview, onClose, onGeneratePDF, l
         {/* Modal Content */}
         <div className="flex-1 overflow-y-auto p-6" style={{ maxHeight: 'calc(90vh - 120px)' }}>
           <div ref={previewRef} className="bg-white max-w-2xl mx-auto">
-            {/* Header */}
+            {/* Cover Page Preview */}
             <div className="text-center mb-8 border-b-2 border-blue-600 pb-6">
               <h1 className="text-3xl font-bold text-blue-600 mb-2">
-                {quranData.chapter.name_simple}
+                {coverPageOptions.title}
               </h1>
               <h2 className="text-2xl text-gray-800 mb-2">
-                {quranData.chapter.name_arabic}
+                {coverPageOptions.subtitle}
               </h2>
-              <p className="text-gray-600 text-sm">
-                Chapter {quranData.chapter.id} • {quranData.chapter.verses_count} verses
-              </p>
             </div>
 
-            {/* Bismillah */}
-            {quranData.chapter.bismillah_pre && (
-              <div className="text-center mb-8 p-6 bg-gray-50 rounded-lg">
-                <p className="text-xl text-gray-800 mb-2 font-medium">
-                  بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
-                </p>
-                <p className="text-sm text-gray-600">
-                  In the name of Allah, the Most Gracious, the Most Merciful
-                </p>
-              </div>
-            )}
+            {/* Surahs Content */}
+            <div className="space-y-8">
+              {quranDataList.map((quranData) => (
+                <div key={quranData.chapter.id} className="border-b border-gray-200 pb-6">
+                  {/* Surah Header */}
+                  <div className="text-center mb-6">
+                    <h3 className="text-2xl font-bold text-gray-800 mb-2">
+                      {quranData.chapter.name_simple}
+                    </h3>
+                    <p className="text-gray-600 text-sm">
+                      Chapter {quranData.chapter.id} • {quranData.chapter.verses_count} verses
+                    </p>
+                  </div>
 
-            {/* Verses */}
-            <div className="space-y-6">
-              {quranData.verses.map((verse) => (
-                <VerseDisplay key={verse.id} verse={verse} />
+                  {/* Bismillah */}
+                  {quranData.chapter.bismillah_pre && (
+                    <div className="text-center mb-6 p-4 bg-gray-50 rounded-lg">
+                      <p className="text-xl text-gray-800 mb-2 font-medium">
+                        بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+                      </p>
+                      <p className="text-sm text-gray-600">
+                        In the name of Allah, the Most Gracious, the Most Merciful
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Verses */}
+                  <div className="space-y-4">
+                    {quranData.verses.map((verse) => (
+                      <VerseDisplay key={verse.id} verse={verse} />
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
           </div>
