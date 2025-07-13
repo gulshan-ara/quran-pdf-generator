@@ -5,7 +5,10 @@ interface CoverPageOptionsComponentProps {
   onChange: (options: CoverPageOptions) => void;
 }
 
-export function CoverPageOptionsComponent({ options, onChange }: CoverPageOptionsComponentProps) {
+export function CoverPageOptionsComponent({
+  options,
+  onChange,
+}: CoverPageOptionsComponentProps) {
   const handleChange = (key: keyof CoverPageOptions, value: any) => {
     onChange({
       ...options,
@@ -15,39 +18,29 @@ export function CoverPageOptionsComponent({ options, onChange }: CoverPageOption
 
   return (
     <div className="bg-gray-50 rounded-lg p-6">
-      <h3 className="text-lg font-semibold text-gray-800 mb-4">Cover Page Options</h3>
-      
+      <h3 className="text-lg font-semibold text-gray-800 mb-4">
+        Cover Page Options
+      </h3>
+
       <div className="space-y-4">
         {/* Title */}
         <div>
-          <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="title"
+            className="block text-sm font-medium text-gray-700 mb-2"
+          >
             Title
           </label>
           <input
             id="title"
             type="text"
             value={options.title}
-            onChange={(e) => handleChange('title', e.target.value)}
+            onChange={(e) => handleChange("title", e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder:text-black text-black"
             placeholder="Enter PDF title"
           />
         </div>
-
-        {/* Subtitle */}
-        <div>
-          <label htmlFor="subtitle" className="block text-sm font-medium text-gray-700 mb-2">
-            Subtitle
-          </label>
-          <input
-            id="subtitle"
-            type="text"
-            value={options.subtitle}
-            onChange={(e) => handleChange('subtitle', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder:text-black text-black"
-            placeholder="Enter subtitle"
-          />
-        </div>    
       </div>
     </div>
   );
-} 
+}
