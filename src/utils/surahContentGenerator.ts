@@ -141,7 +141,7 @@ export class SurahContentGenerator {
             <!-- Right column: flexible, Arabic text aligned top right -->
             <div style="flex: 1; display: flex; flex-direction: column; justify-content: flex-start; text-align: right;">
               <p style="
-                font-size: 24px;
+                font-size: 30px;
                 color: #1f2937;
                 margin: 0;
                 line-height: 1.8;

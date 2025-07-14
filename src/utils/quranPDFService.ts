@@ -43,9 +43,6 @@ export class QuranPDFService {
         await contentGenerator.generateCompleteSurah(quranData);
       }
 
-      // Add footer
-      pdfGenerator.addFooter();
-
       // Save the PDF
       const fileName = this.generateFileName(selectedSurahs);
       pdfGenerator.save(fileName);
