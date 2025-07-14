@@ -1,4 +1,18 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Quran PDF Generator
+
+A web application to generate custom PDF documents containing selected Surahs (chapters) from the Holy Quran. Users can select multiple Surahs, customize the cover page, preview the PDF, and download it—all in a modern, user-friendly interface.
+
+---
+
+## Features
+
+- **Select Multiple Surahs:** Choose any combination of Surahs to include in your PDF.
+- **Customizable Cover Page:** Set the title of youe own.
+- **PDF Preview:** Instantly preview the generated PDF before downloading.
+- **Download PDF:** Generate and download a high-quality PDF with your selected content.
+- **Modern UI:** Clean, responsive design built with React and Tailwind CSS.
+
+---
 
 ## Getting Started
 
@@ -14,23 +28,46 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [https://quran-pdf-generator.vercel.app/](https://quran-pdf-generator.vercel.app/) with your browser to see the app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Usage
 
-## Learn More
+1. **Select Surahs:** Use the Surah selector to pick one or more chapters from the Quran.
+2. **Customize Cover Page:** Edit the title, subtitle, and toggle options for date and stats.
+3. **Preview PDF:** Click the "Preview PDF" button to see a live preview.
+4. **Download PDF:** When satisfied, click "Generate PDF" to download your custom document.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Tech Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- [Next.js](https://nextjs.org/) (React framework)
+- [React](https://react.dev/)
+- [jsPDF](https://github.com/parallax/jsPDF) (PDF generation)
+- [html2canvas](https://github.com/niklasvh/html2canvas) (HTML to image for cover page)
+- [Tailwind CSS](https://tailwindcss.com/) (styling)
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Project Structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `src/app/` – Main app pages and API routes
+- `src/components/` – UI components (Surah selector, preview modal, etc.)
+- `src/services/` – Quran API service
+- `src/utils/` – PDF and cover page generation logic
+- `src/types/` – TypeScript types
+
+---
+
+## Credits
+
+- Quran data powered by [quran.com API](https://api.quran.com/api/v4/)
+- UI and PDF design by Gulshan Ara Nawshin
+
+---
+
+## License
+
+This project is for educational and personal use. Please check with the author for redistribution or commercial use.
