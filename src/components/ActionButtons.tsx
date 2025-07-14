@@ -13,7 +13,7 @@ export function ActionButtons({ onPreview, onGenerate, previewLoading, generateL
       {/* Error Display */}
       {error && (
         <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-          <p className="text-red-700 text-sm">{error}</p>
+          <p className="text-red-700 text-sm">{error === "Invalid string length" ? "Please try selecting less surahs." : error}</p>
         </div>
       )}
 
